@@ -1,6 +1,22 @@
-﻿Public Class WorkingWithFilesForm
+﻿
+Imports System.IO
 
+Public Class WorkingWithFilesForm
 
+    Sub FileReadDemo()
+        'TODO dialogs and actually read the file
+        Try
+            FileOpen(1, "SomeTextFile.txt", OpenMode.Input)
+            'Catch ex As System.IO.FileNotFoundException
+        Catch ex As FileNotFoundException 'use Imports System.IO to not need the full name
+            MsgBox("File Does Not exist")
+        Catch ex As Exception
+            MsgBox("Something weird happened")
+        End Try
+
+        FileClose(1)
+
+    End Sub
 
 
     Sub FileWriteDemo()
@@ -22,6 +38,7 @@
     End Sub
 
     Private Sub WorkingWithFilesForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        FileWriteDemo()
+        'FileWriteDemo()
+        FileReadDemo()
     End Sub
 End Class
