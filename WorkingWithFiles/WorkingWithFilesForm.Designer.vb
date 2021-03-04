@@ -22,7 +22,12 @@ Partial Class WorkingWithFilesForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
+        '
+        'OpenFileDialog
+        '
+        Me.OpenFileDialog.FileName = "OpenFileDialog1"
         '
         'WorkingWithFilesForm
         '
@@ -35,4 +40,5 @@ Partial Class WorkingWithFilesForm
 
     End Sub
 
+    Friend WithEvents OpenFileDialog As OpenFileDialog
 End Class
