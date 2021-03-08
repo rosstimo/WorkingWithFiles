@@ -2,6 +2,18 @@
 Imports System.IO
 
 Public Class WorkingWithFilesForm
+    Dim names() As String
+
+
+    Sub ArrayTricks()
+        Dim fruit() As String
+        Dim fruitNames As String = "Apples,Grapes,Oranges,Tomatoes,"
+
+        fruit = Split(fruitNames, ",")
+
+        fruit(0) = "Banana"
+
+    End Sub
 
     Sub ReadEntireFile()
         Dim inputData As String
@@ -63,9 +75,42 @@ Public Class WorkingWithFilesForm
 
     End Sub
 
+    Sub ReadNames()
+        Dim inputData As String
+        Dim fileName As String
+        Dim fileNumber As Integer = FreeFile()
+        Dim inputString As String
+
+        OpenFileDialog.ShowDialog()
+        fileName = OpenFileDialog.FileName
+
+        Try
+            FileOpen(fileNumber, fileName, OpenMode.Input)
+        Catch ex As FileNotFoundException
+            'FileOpen(fileNumber, fileName, OpenMode.Input)
+            MsgBox($"The file named {fileName} was not found...")
+        End Try
+
+        Do Until EOF(fileNumber)
+            Input(fileNumber, inputData)
+            inputString &= inputData & ","
+            'DisplayListBox.Items.Add(inputData)
+        Loop
+        names = Split(inputString, ",")
+
+        FileClose(fileNumber)
+    End Sub
+
     Private Sub WorkingWithFilesForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         'FileWriteDemo()
         'FileReadDemo()
-        ReadEntireFile()
+        'ReadEntireFile()
+        'ReadNames()
+        ArrayTricks()
     End Sub
+
+    Private Sub GoButton_Click(sender As Object, e As EventArgs) Handles GoButton.Click
+        ReadNames()
+    End Sub
+
 End Class
